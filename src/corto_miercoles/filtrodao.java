@@ -8,6 +8,7 @@ package corto_miercoles;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -97,22 +98,60 @@ public class filtrodao implements metodos<filtro> {
     }
 
     @Override
-    public filtro read(Object key) {
+    public filtro read(filtro g) {
         filtro f = null;
         PreparedStatement ps;
         ResultSet rs;
-        try{
+        try {
             ps = con.getCnx().prepareStatement(SQL_READ);
-            
-        }   
-        catch(SQLException error){
-            
+            ps.setString(1, g.nombre);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                boolean inpr = true;
+                if (rs.getInt(7) == 1) {
+                    
+                } else {
+                    inpr = false;
+                }
+
+                f = new filtro(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6),inpr);
+            }
+            rs.close();
+        } catch (SQLException error) {
+
         }
+        return f;
     }
 
     @Override
     public ArrayList<filtro> readall() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<filtro> all = new ArrayList();
+        Statement s;
+        ResultSet rs;
+        try{
+            s = con.getCnx().prepareStatement(SQL_READALL);
+            rs = s.executeQuery(SQL_READ);
+            while (rs.next()) {
+                boolean inpr = true;
+                if (rs.getInt(7) == 1) {
+                    
+                } else {
+                    inpr = false;
+                }
+
+                all.add(new filtro(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6),inpr));
+                
+            }
+            rs.close();
+        }   
+        catch(SQLException sql){
+            
+        }
+        
+        
+        
+        
+        return all;
     }
 
 }

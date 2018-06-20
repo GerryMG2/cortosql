@@ -16,6 +16,6 @@ public interface metodos <Generic>{
     public boolean create(Generic g);
     public boolean delete(Generic g);
     public boolean update(Generic c);
-    public Generic read(Object key);
+    public Generic read(Generic g);
     public ArrayList<Generic> readall();
 }

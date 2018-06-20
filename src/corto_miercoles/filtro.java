@@ -20,5 +20,15 @@ public class filtro {
     public filtro(){
         
     }
+
+    public filtro(int id, String nombre, String Director, String pais, String clasificacion, int annio, boolean inproyec) {
+        this.id = id;
+        this.nombre = nombre;
+        this.Director = Director;
+        this.pais = pais;
+        this.clasificacion = clasificacion;
+        this.annio = annio;
+        this.inproyec = inproyec;
+    }
     
 }
