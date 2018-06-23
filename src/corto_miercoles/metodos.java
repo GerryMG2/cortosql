@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public interface metodos <Generic>{
     public boolean create(Generic g);
-    public boolean delete(Generic g);
+    public boolean delete(String g);
     public boolean update(Generic c);
-    public Generic read(Generic g);
+    public Generic read(String g);
     public ArrayList<Generic> readall();
 }

@@ -52,11 +52,11 @@ public class filtrodao implements metodos<filtro> {
     }
 
     @Override
-    public boolean delete(filtro g) {
+    public boolean delete(String g) {
         PreparedStatement ps;
         try {
             ps = con.getCnx().prepareStatement(SQL_DELETE);
-            ps.setString(1, g.nombre);
+            ps.setString(1, g);
             if (ps.executeUpdate() > 0) {
                 return true;
             }
@@ -98,13 +98,13 @@ public class filtrodao implements metodos<filtro> {
     }
 
     @Override
-    public filtro read(filtro g) {
+    public filtro read(String g) {
         filtro f = null;
         PreparedStatement ps;
         ResultSet rs;
         try {
             ps = con.getCnx().prepareStatement(SQL_READ);
-            ps.setString(1, g.nombre);
+            ps.setString(1, g);
             rs = ps.executeQuery();
             while (rs.next()) {
                 boolean inpr = true;
